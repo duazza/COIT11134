@@ -1,0 +1,3 @@
+Customer,1,Duane,0409911164,18 View St Bundaberg,4670,Duane,credit card
+Customer,2,Dave,0409911165,19 View St Bundaberg,4670,Duane,credit card
+Vendor,3,Sally Burrows,0488999666,21 Church St Brisbane,4002,Sally,Paypal

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.SubScene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="506.0" prefWidth="621.0" style="-fx-background-color: orange;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tropcioassessment2.tropico2.ReportingRankingController">
+   <children>
+      <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="131.0" layoutY="57.0" prefHeight="81.0" prefWidth="483.0" text="Sale Rankings" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Comic Sans MS Bold" size="54.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="189.0" fitWidth="206.0" layoutX="-16.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Brown%20Yellow%20Green%20Illustration%20Circle%20Badge%20Banana%20Snack%20Logo_1.png" />
+         </image>
+      </ImageView>
+      <ButtonBar layoutX="7.0" layoutY="-1.0" prefHeight="40.0" prefWidth="122.0" />
+      <Button fx:id="closeButton" layoutX="24.0" layoutY="457.0" mnemonicParsing="false" onAction="#handleCloseAction" prefHeight="42.0" prefWidth="134.0" style="-fx-background-color: green;" text="CLOSE" textFill="WHITE">
+         <font>
+            <Font name="Comic Sans MS Bold" size="20.0" />
+         </font>
+      </Button>
+      <TextArea fx:id="field1" layoutX="46.0" layoutY="182.0" prefHeight="37.0" prefWidth="260.0" />
+      <Label layoutX="12.0" layoutY="189.0" text="1st" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="field2" layoutX="46.0" layoutY="224.0" prefHeight="38.0" prefWidth="260.0" />
+      <Label layoutX="12.0" layoutY="231.0" text="2nd" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="field3" layoutX="46.0" layoutY="268.0" prefHeight="38.0" prefWidth="260.0" />
+      <Label layoutX="12.0" layoutY="275.0" text="3rd" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="field4" layoutX="46.0" layoutY="312.0" prefHeight="38.0" prefWidth="260.0" />
+      <Label layoutX="12.0" layoutY="319.0" text="4th" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="field5" layoutX="46.0" layoutY="356.0" prefHeight="38.0" prefWidth="260.0" />
+      <Label layoutX="12.0" layoutY="363.0" text="5th" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="backButton" graphicTextGap="0.0" layoutX="539.0" layoutY="470.0" mnemonicParsing="false" onAction="#handleBackAction" prefHeight="11.0" prefWidth="69.0" style="-fx-background-color: lightgray;" text="BACK" textFill="#030202">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Button>
+      <TextArea fx:id="field6" layoutX="354.0" layoutY="180.0" prefHeight="38.0" prefWidth="260.0" />
+      <Label layoutX="317.0" layoutY="187.0" text="6th" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="field7" layoutX="354.0" layoutY="222.0" prefHeight="38.0" prefWidth="260.0" />
+      <Label layoutX="317.0" layoutY="229.0" text="7th" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="field8" layoutX="354.0" layoutY="266.0" prefHeight="38.0" prefWidth="260.0" />
+      <Label layoutX="317.0" layoutY="273.0" text="8th" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="field9" layoutX="354.0" layoutY="310.0" prefHeight="38.0" prefWidth="260.0" />
+      <Label layoutX="317.0" layoutY="317.0" text="9th" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="field10" layoutX="354.0" layoutY="354.0" prefHeight="38.0" prefWidth="260.0" />
+      <Label layoutX="317.0" layoutY="361.0" text="10th" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold" size="18.0" />
+         </font>
+      </Label>
+      <SubScene height="37.0" layoutX="-1.0" layoutY="-2.0" width="622.0">
+         <root>
+            <Region />
+         </root>
+      </SubScene>
+      <Label layoutX="4.0" layoutY="-5.0" prefHeight="47.0" prefWidth="134.0" text="Reporting">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="logoutButton" layoutX="515.0" layoutY="5.0" mnemonicParsing="false" onAction="#handleLogoutAction" text="logout" />
+      <Button fx:id="exitButton" layoutX="581.0" layoutY="5.0" mnemonicParsing="false" onAction="#handleExitAction" text="exit" />
+   </children>
+</AnchorPane>

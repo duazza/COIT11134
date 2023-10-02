@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.SubScene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="506.0" prefWidth="621.0" style="-fx-background-color: orange;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tropcioassessment2.tropico2.ReportingPurchaseHistoryController">
+   <children>
+      <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="131.0" layoutY="57.0" prefHeight="81.0" prefWidth="483.0" text="Purchase History" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Comic Sans MS Bold" size="54.0" />
+         </font>
+      </Label>
+      <ButtonBar layoutX="7.0" layoutY="-1.0" prefHeight="40.0" prefWidth="122.0" />
+      <Button fx:id="closeButton" layoutX="431.0" layoutY="418.0" mnemonicParsing="false" onAction="#handleCloseAction" prefHeight="42.0" prefWidth="134.0" style="-fx-background-color: green;" text="CLOSE" textFill="WHITE">
+         <font>
+            <Font name="Comic Sans MS Bold" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="resetButton" layoutX="240.0" layoutY="418.0" mnemonicParsing="false" onAction="#handleResetAction" prefHeight="38.0" prefWidth="176.0" style="-fx-background-color: green;" text="RESET FILTER" textFill="WHITE">
+         <font>
+            <Font name="Comic Sans MS Bold" size="20.0" />
+         </font>
+      </Button>
+      <TextArea fx:id="largeTextField" layoutX="17.0" layoutY="157.0" prefHeight="202.0" prefWidth="589.0" />
+      <DatePicker layoutX="10.0" layoutY="417.0" />
+      <Label layoutX="17.0" layoutY="337.0" prefHeight="81.0" prefWidth="152.0" text="FILER BY DATE" textFill="WHITE">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="fromDateField" layoutX="17.0" layoutY="364.0" prefHeight="81.0" prefWidth="152.0" text="from" textFill="#5b5b5b">
+         <font>
+            <Font name="Comic Sans MS Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="439.0" prefHeight="26.0" prefWidth="152.0" text="to" textFill="#5b5b5b">
+         <font>
+            <Font name="Comic Sans MS Bold" size="15.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="toDateField" layoutX="12.0" layoutY="462.0" />
+      <Button fx:id="backButton" graphicTextGap="0.0" layoutX="546.0" layoutY="472.0" mnemonicParsing="false" onAction="#handleBackAction" prefHeight="11.0" prefWidth="69.0" style="-fx-background-color: lightgray;" text="BACK" textFill="#030202">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Button>
+      <SubScene height="37.0" width="622.0">
+         <root>
+            <Region />
+         </root>
+      </SubScene>
+      <Label layoutX="12.0" layoutY="-4.0" prefHeight="47.0" prefWidth="122.0" text="Reporting">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="logoutButton" layoutX="521.0" layoutY="6.0" mnemonicParsing="false" onAction="#handleLogoutAction" text="logout" />
+      <Button fx:id="exitButton" layoutX="581.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleExitAction" text="exit" />
+   </children>
+</AnchorPane>

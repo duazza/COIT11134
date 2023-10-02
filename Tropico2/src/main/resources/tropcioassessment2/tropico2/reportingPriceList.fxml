@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.SubScene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="506.0" prefWidth="621.0" style="-fx-background-color: orange;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tropcioassessment2.tropico2.ReportingPriceListController">
+   <children>
+      <Label alignment="CENTER" layoutX="131.0" layoutY="57.0" prefHeight="81.0" prefWidth="483.0" text="Price List" textFill="WHITE">
+         <font>
+            <Font name="Comic Sans MS Bold" size="66.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="171.0" fitWidth="167.0" layoutX="-16.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Brown%20Yellow%20Green%20Illustration%20Circle%20Badge%20Banana%20Snack%20Logo_1.png" />
+         </image>
+      </ImageView>
+      <ButtonBar layoutX="7.0" layoutY="-1.0" prefHeight="40.0" prefWidth="122.0" />
+      <Button fx:id="closeButton" layoutX="344.0" layoutY="439.0" mnemonicParsing="false" onAction="#handleCloseAction" prefHeight="52.0" prefWidth="134.0" style="-fx-background-color: green;" text="CLOSE" textFill="WHITE">
+         <font>
+            <Font name="Comic Sans MS Bold" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="searchButton" layoutX="320.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleSearchAction" prefHeight="38.0" prefWidth="176.0" style="-fx-background-color: green;" text="SEARCH" textFill="WHITE">
+         <font>
+            <Font name="Comic Sans MS Bold" size="20.0" />
+         </font>
+      </Button>
+      <TextArea fx:id="largeTextField" layoutX="21.0" layoutY="196.0" prefHeight="294.0" prefWidth="239.0" />
+      <TextField fx:id="nameField" layoutX="316.0" layoutY="196.0">
+         <font>
+            <Font name="Calibri" size="16.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="IDField" layoutX="316.0" layoutY="268.0">
+         <font>
+            <Font name="Calibri" size="16.0" />
+         </font>
+      </TextField>
+      <Label layoutX="319.0" layoutY="166.0" text="Name">
+         <font>
+            <Font name="Calibri" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="319.0" layoutY="238.0" text="ID">
+         <font>
+            <Font name="Calibri" size="25.0" />
+         </font>
+      </Label>
+      <Button fx:id="resetButton" layoutX="320.0" layoutY="371.0" mnemonicParsing="false" onAction="#handleResetAction" prefHeight="38.0" prefWidth="176.0" style="-fx-background-color: green;" text="RESET FILTER" textFill="WHITE">
+         <font>
+            <Font name="Comic Sans MS Bold" size="20.0" />
+         </font>
+      </Button>
+      <Label layoutX="21.0" layoutY="166.0" prefHeight="30.0" prefWidth="239.0" text="Name   |   Sale Price   |  Purchase Price">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Label>
+      <Button fx:id="backButton" graphicTextGap="0.0" layoutX="549.0" layoutY="471.0" mnemonicParsing="false" onAction="#handleBackAction" prefHeight="11.0" prefWidth="69.0" style="-fx-background-color: lightgray;" text="BACK" textFill="#030202">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Button>
+      <SubScene height="37.0" width="622.0">
+         <root>
+            <Region />
+         </root>
+      </SubScene>
+      <Label layoutX="5.0" layoutY="-3.0" prefHeight="47.0" prefWidth="143.0" text="Reporting">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="logoutButton" layoutX="516.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleLogoutAction" text="logout" />
+      <Button fx:id="exitButton" layoutX="582.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleExitAction" text="exit" />
+   </children>
+</AnchorPane>
