@@ -24,6 +24,8 @@ public class DataHandlerTransaction {
     private String fileName;
     private List<Transaction> transactionList = new ArrayList<>();
     private ArrayList<TransactionAdjustment> adjustmentList;
+    private List<Transaction> newTransactions = new ArrayList<>();
+
 
     public DataHandlerTransaction(String fileName) {
         this.fileName = fileName;
@@ -235,10 +237,10 @@ public class DataHandlerTransaction {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }*/
+    }
     public void writeDataFile() {
         System.out.println("Starting to write to file: " + fileName);
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName, true))){
             for (Transaction transaction : transactionList) {
                 bw.write(transaction.toStringForFile());
                 bw.newLine();
@@ -246,17 +248,34 @@ public class DataHandlerTransaction {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }*/
+public void writeDataFile() {
+    System.out.println("Starting to write to file: " + fileName);
+    try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName, true))) {
+        for (Transaction transaction : newTransactions) {
+            bw.write(transaction.toStringForFile());
+            bw.newLine();
+        }
+        newTransactions.clear(); // Clear the list after writing to the file
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+}
 
     public void addAndSaveTransaction(TransactionCustomer transaction) {
         this.transactionList.add(transaction);
         writeDataFile();
     }
-
-    public void addTransaction(Transaction transaction) {
+    
+public void addTransaction(Transaction transaction) {
+    this.transactionList.add(transaction);
+    this.newTransactions.add(transaction);
+    System.out.println("Added new transaction: " + transaction.toString());
+}
+   /* public void addTransaction(Transaction transaction) {
         this.transactionList.add(transaction);
         System.out.println("Added new transaction: " + transaction.toString());
-    }
+    }*/
 
     public Transaction searchTransactionByInvoiceNumber(int invoiceNumber) {
         for (Transaction transaction : transactionList) {

@@ -30,8 +30,6 @@ public class InventoryStocktakeController implements Initializable {
     @FXML
     private Button backButton;
     @FXML
-    private TextField dateField;
-    @FXML
     private TextField QTYField;
     @FXML
     private Button nextItemButton;
@@ -72,7 +70,7 @@ public class InventoryStocktakeController implements Initializable {
     }
 
 
-    @FXML
+ /*   @FXML
 private void handleNextAction(ActionEvent event) {
     int searchID;
     try {
@@ -132,7 +130,73 @@ private void resetForm() {
     QTYField.clear();
 }   
         
+   */
     
+@FXML
+private void handleNextAction(ActionEvent event) {
+    int searchID;
+    try {
+        searchID = Integer.parseInt(searchIDField.getText().trim());
+    } catch (NumberFormatException e) {
+        // Handle invalid ID
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("Please enter a valid stock item ID.");
+        alert.showAndWait();
+        return;
+    }
+    
+    double newQty;
+    try {
+        newQty = Double.parseDouble(QTYField.getText().trim());
+    } catch (NumberFormatException e) {
+        // Handle invalid QTY
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("Please enter a valid quantity.");
+        alert.showAndWait();
+        return;
+    }
+    
+    DataHandlerInventory dataHandlerInventory = App.getDataHandlerInventory();
+    StockInventory stockItem = dataHandlerInventory.searchItemByCode(searchID);
+    
+    if (stockItem != null) {
+        // Create a new transaction for this stock adjustment
+        double purchasePrice = stockItem.getPurchasePrice(); 
+        TransactionAdjustment stockAdjustment = new TransactionAdjustment(
+                searchID, 
+                stockItem.getName(), 
+                newQty, // Directly use the new quantity entered
+                purchasePrice
+        );
+
+        // Save this adjustment as a transaction in transaction.txt
+        DataHandlerTransaction dataHandlerTransaction = App.getDataHandlerTransaction();
+        dataHandlerTransaction.addTransaction(stockAdjustment);
+        
+        dataHandlerTransaction.writeDataFile();
+
+        resetForm();
+    } else {
+        // Item not found. Show an alert to the user
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("Item not found!");
+        alert.showAndWait();
+    }
+}
+
+private void resetForm() {
+    searchIDField.clear();
+    searchNameField.clear();
+    searchQTYField.clear();
+    QTYField.clear();
+}  
+
 
     @FXML
     private void handleLogoutAction(ActionEvent event) {
@@ -144,7 +208,46 @@ private void resetForm() {
         App.exit();
     }
 
-    @FXML
+   @FXML
+private void handleSearchAction(ActionEvent event) {
+    // Get the entered ID
+    String enteredIDStr = searchIDField.getText().trim();
+
+    // Access the necessary data handlers
+    DataHandlerInventory dataHandlerInventory = App.getDataHandlerInventory();
+    DataHandlerTransaction dataHandlerTransaction = App.getDataHandlerTransaction();  // Ensure you have this handler available
+
+    StockInventory stockItem = null;
+
+    // Search by ID
+    if (!enteredIDStr.isEmpty()) {
+        try {
+            int enteredID = Integer.parseInt(enteredIDStr);
+            stockItem = dataHandlerInventory.searchItemByCode(enteredID);
+        } catch (NumberFormatException e) {
+            // Handle invalid ID, perhaps with an alert or a message in searchNameField.
+            searchNameField.setText("Please enter a valid stock item ID.");
+            return;
+        }
+    }
+
+    // If stock item is found, calculate and display stock details
+    if (stockItem != null) {
+        // Using the new method to calculate adjusted quantity
+        double adjustedQuantity = dataHandlerTransaction.calculateAdjustedQuantityForItem(stockItem.getProductCode());
+        double finalStockOnHand = stockItem.getStockLevel() + adjustedQuantity;
+
+        // Display the stock details
+        searchNameField.setText(stockItem.getName());
+        searchQTYField.setText(String.valueOf(finalStockOnHand));
+    } else {
+        // Show that the item is not found, perhaps with an alert or a message in searchNameField.
+        searchNameField.setText("Stock item not found with the provided ID.");
+        searchQTYField.clear();
+    }
+}
+    
+    /*@FXML
     private void handleSearchAction(ActionEvent event) {
            int searchID;
     try {
@@ -189,8 +292,6 @@ public void recordStockAdjustment(StockInventory adjustedProduct, int adjustedQu
     // Save the updated transaction list to the file
     dataHandlerTransaction.writeDataFile();
 }
-
-}
-
-        
+*/
+}   
     

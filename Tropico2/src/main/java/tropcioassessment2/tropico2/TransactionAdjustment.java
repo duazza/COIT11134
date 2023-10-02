@@ -102,6 +102,16 @@ public String toStringForFile() {
 }
 
 
+    @Override
+    public String toString() {
+        return "TransactionAdjustment{" +
+               "adjustedStockID=" + adjustedStockID +
+               ", adjustedStockName='" + adjustedStockName + '\'' +
+               ", adjustedQuantity=" + adjustedQuantity +
+               '}';
+    }
+}
+
 /*@Override
 public String toStringForFile() {
     StringJoiner sj = new StringJoiner(",");
@@ -155,13 +165,3 @@ public String toStringForFile() {
 
         return sj.toString();
     }*/
-
-    @Override
-    public String toString() {
-        return "TransactionAdjustment{" +
-               "adjustedStockID=" + adjustedStockID +
-               ", adjustedStockName='" + adjustedStockName + '\'' +
-               ", adjustedQuantity=" + adjustedQuantity +
-               '}';
-    }
-}
