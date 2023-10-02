@@ -54,22 +54,12 @@
             <Font name="Comic Sans MS Bold" size="25.0" />
          </font>
       </Label>
-      <TextField fx:id="dateField" layoutX="405.0" layoutY="218.0" prefHeight="28.0" prefWidth="176.0">
+      <TextField fx:id="QTYField" layoutX="405.0" layoutY="215.0" prefHeight="28.0" prefWidth="176.0">
          <font>
             <Font name="Calibri" size="16.0" />
          </font>
       </TextField>
-      <TextField fx:id="QTYField" layoutX="405.0" layoutY="255.0" prefHeight="28.0" prefWidth="176.0">
-         <font>
-            <Font name="Calibri" size="16.0" />
-         </font>
-      </TextField>
-      <Label layoutX="353.0" layoutY="221.0" text="Date">
-         <font>
-            <Font name="Calibri Bold" size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="358.0" layoutY="258.0" text="Qty">
+      <Label layoutX="358.0" layoutY="218.0" text="qty">
          <font>
             <Font name="Calibri Bold" size="20.0" />
          </font>
@@ -89,7 +79,7 @@
             <Font name="Calibri" size="16.0" />
          </font>
       </TextField>
-      <Button fx:id="nextItemButton" layoutX="405.0" layoutY="292.0" mnemonicParsing="false" onAction="#handleNextAction" prefHeight="38.0" prefWidth="176.0" style="-fx-background-color: green;" text="stock write off" textFill="WHITE">
+      <Button fx:id="nextItemButton" layoutX="405.0" layoutY="248.0" mnemonicParsing="false" onAction="#handleNextAction" prefHeight="38.0" prefWidth="176.0" style="-fx-background-color: green;" text="stock write off" textFill="WHITE">
          <font>
             <Font name="Comic Sans MS Bold" size="20.0" />
          </font>
