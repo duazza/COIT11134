@@ -8,6 +8,7 @@ package tropcioassessment2.tropico2;
  *
  * @author Tropico
  */
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -19,6 +20,7 @@ import javafx.scene.control.TextField;
 
 //this will manage the inventory data
 public class DataHandlerInventory {
+
     //defining 
     private String fileName;
     private ArrayList<StockInventory> inventoryList;
@@ -31,7 +33,16 @@ public class DataHandlerInventory {
     }
 
     //method to the read the inventory file.
-    private void readDataFile() {
+    private void readDataFile() throws FileNotFoundException {
+        File file = new File(fileName);
+        if (!file.exists()) {//adds the file if doesn't exist
+            try {
+                file.createNewFile();
+            } catch (IOException ex) {
+                System.err.println("Error creating new file: " + ex.getMessage());
+                return;
+            }
+        }
         try {
             Scanner in = new Scanner(new FileReader(fileName));
 
@@ -53,12 +64,14 @@ public class DataHandlerInventory {
             }
             in.close();
         } catch (FileNotFoundException ex) {
-            System.err.println("File not found: " + ex.getMessage());
+            throw ex; // rethrow the exception
         } catch (Exception ex) {
             System.err.println("Error processing file: " + ex.getMessage());
+
         }
     }
 
+    //boolean method for saving the data for the inventory item
     //boolean method for saving the data for the inventory item
     public boolean saveData() {
         try {
@@ -139,7 +152,7 @@ public class DataHandlerInventory {
                 inventory.setName(editedName);
                 inventory.setSalePrice(editedSalePrice);
                 inventory.setPurchasePrice(editedPurchasePrice);
-                inventory.setAvailable(editedAvailability); 
+                inventory.setAvailable(editedAvailability);
                 return true;
             }
         }

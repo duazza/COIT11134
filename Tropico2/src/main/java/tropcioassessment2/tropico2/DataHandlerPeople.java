@@ -4,8 +4,10 @@
  */
 package tropcioassessment2.tropico2;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.List;
@@ -16,7 +18,6 @@ import javafx.scene.control.TextField;
  *
  * @author Tropico
  */
-
 //this will manage the data for people
 public class DataHandlerPeople {
 
@@ -32,7 +33,16 @@ public class DataHandlerPeople {
     }
 
     //method to read the text file and create the objects and arrays
-    private void readDataFile() {
+    private void readDataFile() throws FileNotFoundException {
+        File file = new File(fileName);
+        if (!file.exists()) {//adds the file if doesn't exist
+            try {
+                file.createNewFile();
+            } catch (IOException ex) {
+                System.err.println("Error creating new file: " + ex.getMessage());
+                return;
+            }
+        }
         try {
             Scanner in = new Scanner(new FileReader(fileName));
 
@@ -133,7 +143,7 @@ public class DataHandlerPeople {
             if (person instanceof PersonCustomer) {
                 PersonCustomer customer = (PersonCustomer) person;
 
-                if ("Customer".equalsIgnoreCase(customer.getType())) { 
+                if ("Customer".equalsIgnoreCase(customer.getType())) {
 
                     if ((!name.isEmpty() && customer.getName().equalsIgnoreCase(name))
                             || (ID != -1 && customer.getID() == ID)) {

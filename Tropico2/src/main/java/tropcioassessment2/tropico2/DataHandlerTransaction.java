@@ -6,6 +6,7 @@ package tropcioassessment2.tropico2;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,7 +21,7 @@ import java.util.List;
 //this is the data handler for the transactions
 public class DataHandlerTransaction {
 
-    //define 
+    //define
     private String fileName;
     private List<Transaction> transactionList = new ArrayList<>();
     private ArrayList<TransactionAdjustment> adjustmentList;
@@ -44,7 +45,16 @@ public class DataHandlerTransaction {
 
     //this method will read the txt file for the transactions
     private void readDataFile() {
-        DataHandlerInventory dataHandlerInventory = App.getDataHandlerInventory();
+         File file = new File(fileName);
+    if (!file.exists()) {//adds the file if doesn't exist
+        try {
+            file.createNewFile();
+        } catch (IOException ex) {
+            System.err.println("Error creating new file: " + ex.getMessage());
+            return;
+        }
+    }
+    DataHandlerInventory dataHandlerInventory = App.getDataHandlerInventory();
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -54,7 +64,7 @@ public class DataHandlerTransaction {
 
                 String[] parts = line.split(",");
 
-                String transactionType = parts[0].trim().toUpperCase(); //determing the type 
+                String transactionType = parts[0].trim().toUpperCase(); //determing the type
 
                 switch (transactionType) {
                     case "ADJUSTMENT": {
@@ -77,12 +87,12 @@ public class DataHandlerTransaction {
                                 adjustedStockID, adjustedStockName, adjustedQuantity, purchasePrice
                         );
 
-                        // Add the adjustmentTransaction to list 
+                        // Add the adjustmentTransaction to list
                         adjustmentList.add(adjustmentTransaction);
                         break;
                     }
 
-                    case "CUSTOMER": {  //when type = customer 
+                    case "CUSTOMER": {  //when type = customer
                         int customerID = Integer.parseInt(parts[1]);
 
                         //forming arraylists to help with reports/and the info sections because we don't know the size.
@@ -186,7 +196,7 @@ public class DataHandlerTransaction {
         }
     }
 
-    //this method is to add and save the transaction. 
+    //this method is to add and save the transaction.
     public void addAndSaveTransaction(TransactionCustomer transaction) {
         this.transactionList.add(transaction);
         writeDataFile();
@@ -247,7 +257,7 @@ public class DataHandlerTransaction {
         return sb.toString();
     }
 
-    //grabbing the vendor details for the reports 
+    //grabbing the vendor details for the reports
     public String displayTransactionVendorDetails(TransactionVendor transactionVendor) {
         DataHandlerPeople dataHandlerPeople = App.getDataHandlerPeople();
 
