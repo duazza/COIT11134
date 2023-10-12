@@ -14,8 +14,10 @@ import javafx.scene.control.Button;
 /**
  * FXML Controller class
  *
- * @author duane
+ * @author Tropico
  */
+
+//this is the main controller for vendors
 public class VendorMainController implements Initializable {
 
 
@@ -36,35 +38,35 @@ public class VendorMainController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        // not needed
     }    
     
-    @FXML
+    @FXML //controller to add a vendor
     private void handleAddAction(ActionEvent event) {
           App.changeScene(12);
     }
 
-    @FXML
+    @FXML //controller to edit a vendor
     private void handleEditAction(ActionEvent event) {
           App.changeScene(13);
     }
 
-    @FXML
+    @FXML // purchase order controller
     private void handlePurhchaseAction(ActionEvent event) {
           App.changeScene(14);
     }
 
-    @FXML
+    @FXML //back button
     private void handleBackAction(ActionEvent event) {
           App.changeScene(1);
     }
 
-    @FXML
+    @FXML //logout button 
     private void handleLogoutAction(ActionEvent event) {
           App.changeScene(0);
     }
 
-    @FXML
+    @FXML  //exit button
     private void handleExitAction(ActionEvent event) {
         App.exit();
     }

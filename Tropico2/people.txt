@@ -1,3 +1,9 @@
-Customer,1,Duane,0409911164,18 View St Bundaberg,4670,Duane,credit card
+Customer,1,Duane Powell,0409911164,18 View St Bundaberg,4670,Duane,credit card
 Customer,2,Dave,0409911165,19 View St Bundaberg,4670,Duane,credit card
 Vendor,3,Sally Burrows,0488999666,21 Church St Brisbane,4002,Sally,Paypal
+Customer,4,Aaron Hendricks,0455666888,16 View St Mackay,4890,Aaron,Cash
+Customer,5,Luther Wild,0455555666,29 Barolin St Brisbane,4006,Luther,Cash
+Vendor,6,Global Farms,56,23 Fruit Lane Gladstone,4762,Roger,Direct Debit
+Customer,7,Dave,0455666887,18 New St Bundaberg,4670,Dave,Cash
+Vendor,8,SNS Farm Central,0455746788,2543 Farm Lane Gympie,4324,Norman,Cash
+Customer,9,Town Fruit Shop,0455231458,2154 Laddington St Gympie,4356,Bob,Cash

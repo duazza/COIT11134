@@ -6,25 +6,27 @@ package tropcioassessment2.tropico2;
 
 /**
  *
- * @author duane
+ * @author Tropico
  */
-
 public abstract class Transaction {
-    protected static int invoiceCounter = 0; 
+
+    protected static int invoiceCounter = 0;
     protected int invoiceNumber;  // Changed type to int
     protected String date;
     protected String type;
-    public abstract String[] getProductIDs();
-public abstract double[] getQuantities();
-public abstract String getTransactionType();  // Returns 'VENDOR', 'CUSTOMER', etc.
 
-    
+    public abstract String[] getProductIDs();
+
+    public abstract double[] getQuantities();
+
+    public abstract String getTransactionType();  // Returns 'VENDOR', 'CUSTOMER', ADJUSTMENT
+
     public Transaction() {
         this.date = java.time.LocalDate.now().toString();
-        generateInvoiceNumber();
+        generateInvoiceNumber(); //this generates the invoice ID
     }
-    
-    protected void generateInvoiceNumber() { // Updated return type to void
+
+    protected void generateInvoiceNumber() {
         invoiceCounter++;
         this.invoiceNumber = invoiceCounter;
     }
@@ -60,20 +62,17 @@ public abstract String getTransactionType();  // Returns 'VENDOR', 'CUSTOMER', e
     public void setType(String type) {
         this.type = type;
     }
-    
-    /**
-     * Convert the transaction to its file storage representation.
-     * 
-     * @return A string representation suitable for file storage.
-     */
+
+   //adstract method when adding to file
     public abstract String toStringForFile();
-    
-    @Override
+
+    @Override //tostring method 
     public String toString() {
-        return "Transaction{" +
-               "invoiceNumber=" + invoiceNumber +  // Updated string concatenation
-               ", date='" + date + '\'' +
-               ", type='" + type + '\'' +
-               '}';
+        return "Transaction{"
+                + "invoiceNumber=" + invoiceNumber
+                + // Updated string concatenation
+                ", date='" + date + '\''
+                + ", type='" + type + '\''
+                + '}';
     }
 }

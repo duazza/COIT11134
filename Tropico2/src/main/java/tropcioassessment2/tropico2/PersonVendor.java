@@ -6,22 +6,23 @@ package tropcioassessment2.tropico2;
 
 /**
  *
- * @author duane
+ * @author Tropcio
  */
+
+//this is the subclass for the vendor
 class PersonVendor extends Person {
     
+    //define
     private String contactName;
     private String paymentOptions;
     private String type = "Vendor"; // Hardcoded as Vendor for this subclass
     
-    public PersonVendor(String name, int ID, String phoneNumber, String address, String postcode,
-                        String contactName, String paymentOptions) {
+    //constructor
+    public PersonVendor(String name, int ID, String phoneNumber, String address, String postcode, String contactName, String paymentOptions) {
         super(name, ID, phoneNumber, address, postcode);
         this.contactName = contactName;
         this.paymentOptions = paymentOptions;
     }
-
-    // Additional methods and getters/setters specific to vendors can be added here
 
     public String getContactName() {
         return contactName;
@@ -39,7 +40,7 @@ class PersonVendor extends Person {
         this.paymentOptions = paymentOptions;
     }
 
-    public String getType() {
+    public String getType() { //adds the type of person
         return type;
     }
 
@@ -47,7 +48,7 @@ class PersonVendor extends Person {
         this.type = type;
     }
     
-      @Override
+      @Override //adds to the superclass tostring
     public String toString() {
         return type + "," + super.toString() + "," + contactName + "," + paymentOptions;
     }

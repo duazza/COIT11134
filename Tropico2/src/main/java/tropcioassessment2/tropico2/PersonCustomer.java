@@ -6,22 +6,25 @@ package tropcioassessment2.tropico2;
 
 /**
  *
- * @author duane
+ * @author Tropico
  */
+
+//subclass for a customer 
 class PersonCustomer extends Person {
 
+    //define
     private String contactName;
     private String paymentOptions;
     private String type = "Customer"; // Hardcoded as Customer for this subclass
-    
-    public PersonCustomer(String name, int ID, String phoneNumber, String address, String postcode,
-                          String contactName, String paymentOptions) {
+
+    //constructor
+    public PersonCustomer(String name, int ID, String phoneNumber, String address, String postcode, String contactName, String paymentOptions) {
         super(name, ID, phoneNumber, address, postcode);
         this.contactName = contactName;
         this.paymentOptions = paymentOptions;
     }
 
-          public String getContactName() {
+    public String getContactName() {
         return contactName;
     }
 
@@ -37,7 +40,7 @@ class PersonCustomer extends Person {
         this.paymentOptions = paymentOptions;
     }
 
-    public String getType() {
+    public String getType() { //this adds a type to the person
         return type;
     }
 
@@ -45,15 +48,9 @@ class PersonCustomer extends Person {
         this.type = type;
     }
 
-     @Override
-    public String toString() {
+    @Override
+    public String toString() {  //tostring method adding from the superclass tostring
         return type + "," + super.toString() + "," + contactName + "," + paymentOptions;
     }
 
 }
-
-
-
-
-
-

@@ -8,17 +8,20 @@ import java.util.StringJoiner;
 
 /**
  *
- * @author duane
+ * @author Tropico
  */
 
-  public class TransactionAdjustment extends Transaction {
+//subclass for adjustments - transactions
+public class TransactionAdjustment extends Transaction {
 
+    //define
     private int adjustedStockID;
     private String adjustedStockName;
     private double adjustedQuantity;
     private double purchasePrice;
 
-       public TransactionAdjustment(int adjustedStockID, String adjustedStockName, double adjustedQuantity, double purchasePrice) {
+    //constructor
+    public TransactionAdjustment(int adjustedStockID, String adjustedStockName, double adjustedQuantity, double purchasePrice) {
         this.adjustedStockID = adjustedStockID;
         this.adjustedStockName = adjustedStockName;
         this.adjustedQuantity = adjustedQuantity;
@@ -50,118 +53,63 @@ import java.util.StringJoiner;
         return "ADJUSTMENT";
     }
 
-     @Override
+    @Override // gets the product ID for the prodct we are adjusting
     public String[] getProductIDs() {
         // Return a single product ID in an array for this adjustment
         return new String[]{String.valueOf(adjustedStockID)};
     }
 
-@Override
-public double[] getQuantities() {
-    return new double[]{(double) adjustedQuantity};
-}
-
-@Override
-public String toStringForFile() {
-    StringJoiner sj = new StringJoiner(",");
-
-     // Adding transaction type from superclass
-    sj.add(getTransactionType()); 
-    // Placeholder for customer ID (same position as in the first class)
-    sj.add("0");
-
-    // Add the adjusted stock details
-    sj.add(String.valueOf(adjustedStockID));
-    sj.add(adjustedStockName);
-
-    // Adjusted purchase price (assuming you've added a field for this in TransactionAdjustment)
-    sj.add(String.valueOf(purchasePrice));
-
-    sj.add(String.valueOf(adjustedQuantity));
-
-    // Placeholders for remaining item details
-    sj.add("N/A");  // sale price
-    sj.add("N/A");  // discount
-    sj.add("0.0");  // total price for item
-    sj.add("0");    // item quantity
-
-    // Add placeholders for other fields to ensure consistent format with transaction.txt
-    for (int i = 0; i < 4; i++) {
-        sj.add("N/A");
-        sj.add("N/A");
-        sj.add("0.0");
-        sj.add("0");
+    @Override //getter for the quantity
+    public double[] getQuantities() {
+        return new double[]{(double) adjustedQuantity};
     }
 
-    // Placeholders for order total, invoice number, and date (same positions as in the first class)
-    sj.add("0.0");
-    sj.add("0");
-    sj.add(getDate());
-
-    return sj.toString();
-}
-
-
-    @Override
-    public String toString() {
-        return "TransactionAdjustment{" +
-               "adjustedStockID=" + adjustedStockID +
-               ", adjustedStockName='" + adjustedStockName + '\'' +
-               ", adjustedQuantity=" + adjustedQuantity +
-               '}';
-    }
-}
-
-/*@Override
-public String toStringForFile() {
-    StringJoiner sj = new StringJoiner(",");
-
-    // Placeholder for customer ID (same position as in the first class)
-    sj.add("0");
-
-    // Add the adjusted stock details
-    sj.add(String.valueOf(adjustedStockID));
-    sj.add(adjustedStockName);
-    sj.add("0.0");  // No sale price for adjustments
-    sj.add(String.valueOf(adjustedQuantity));
-
-    // Add placeholders for other fields to ensure consistent format with transaction.txt
-    for (int i = 0; i < 5; i++) {
-        sj.add("N/A");
-        sj.add("N/A");
-        sj.add("0.0");
-        sj.add("0");
-    }
-
-    // Placeholders for order total, invoice number, and date (same positions as in the first class)
-    sj.add("0.0");
-    sj.add("0");
-    sj.add(getDate());
-
-    return sj.toString();
-}
-    /*@Override
+    @Override // this adds the transaction to the file
     public String toStringForFile() {
         StringJoiner sj = new StringJoiner(",");
 
-      
+        // Adding transaction type from superclass
+        sj.add(getTransactionType());
+        // Placeholder for customer ID 
+        sj.add("0");
+
         // Add the adjusted stock details
         sj.add(String.valueOf(adjustedStockID));
         sj.add(adjustedStockName);
-        sj.add("0.0");  // No sale price for adjustments
+
+        // Adjusted purchase price 
+        sj.add(String.valueOf(purchasePrice));
+
         sj.add(String.valueOf(adjustedQuantity));
 
+        // Placeholders for remaining item details
+        sj.add("N/A");  // sale price
+        sj.add("N/A");  // discount
+        sj.add("0.0");  // total price for item
+        sj.add("0");    // item quantity
+
         // Add placeholders for other fields to ensure consistent format with transaction.txt
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 4; i++) {
             sj.add("N/A");
             sj.add("N/A");
             sj.add("0.0");
             sj.add("0");
         }
 
-        sj.add("N/A");  // No total order value for adjustments
+        // Placeholders for order total, invoice number, and date 
         sj.add("0.0");
+        sj.add("0");
         sj.add(getDate());
 
         return sj.toString();
-    }*/
+    }
+
+    @Override //toString method
+    public String toString() {
+        return "TransactionAdjustment{"
+                + "adjustedStockID=" + adjustedStockID
+                + ", adjustedStockName='" + adjustedStockName + '\''
+                + ", adjustedQuantity=" + adjustedQuantity
+                + '}';
+    }
+}

@@ -8,24 +8,25 @@ package tropcioassessment2.tropico2;
  *
  * @author duane
  */
+//this is the class for the stock/inventory
 public class StockInventory {
-        private String name;
-    private int inventoryCode;  // This might be set externally or when the object is created.
+
+    //define
+    private String name;
+    private int inventoryCode;  
     private double salePrice;
     private double purchasePrice;
     private double stockLevel;  // Initialized to 0, but can be modified by Transaction operations.
     private boolean available;
 
+    //constructor
     public StockInventory(String name, int inventoryCode, double salePrice, double purchasePrice) {
         this.name = name;
         this.inventoryCode = inventoryCode;
         this.salePrice = salePrice;
         this.purchasePrice = purchasePrice;
         this.stockLevel = 0;  // Default stock level is 0 when an item is created.
-        
     }
-
-
 
     // Getters
     public String getName() {
@@ -77,9 +78,7 @@ public class StockInventory {
     public void deductStock(double quantity) {
         this.stockLevel -= quantity;
     }
-    
 
-  
     public boolean isAvailable() {
         return available;
     }
@@ -88,11 +87,9 @@ public class StockInventory {
         this.available = available;
     }
 
-    // Optional: Override toString() for easier debugging and data saving
-    @Override
+    @Override //toString method to display the details
     public String toString() {
         return String.format("%s,%d,%.2f,%.2f", name, inventoryCode, salePrice, purchasePrice);
     }
 
-    
 }

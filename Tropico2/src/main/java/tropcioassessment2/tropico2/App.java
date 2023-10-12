@@ -5,36 +5,31 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import static javafx.application.Application.launch;
 import javafx.stage.StageStyle;
-
 
 /**
  * JavaFX App
  */
 public class App extends Application {
 
+    //class variables
     private static Scene sceneSign;
     private static Scene sceneMain;
-    
     private static Scene sceneAddInventory;
     private static Scene sceneEditInventory;
     private static Scene sceneMainInventory;
     private static Scene sceneStocktakeInventory;
     private static Scene sceneCurrentStockInventory;
-
     private static Scene sceneAddCustomer;
     private static Scene sceneEditCustomer;
     private static Scene sceneMainCustomer;
     private static Scene sceneOrderFormCustomer;
-
     private static Scene sceneAddVendor;
     private static Scene sceneEditVendor;
     private static Scene sceneMainVendor;
     private static Scene scenePurchaseOrderVendor;
-
     private static Scene sceneCustomerListReporting;
     private static Scene sceneVendorListReporting;
     private static Scene sceneMainReporting;
@@ -44,56 +39,56 @@ public class App extends Application {
     private static Scene sceneProfitMarginReporting;
     private static Scene scenePurchaseHistoryReporting;
     private static Scene sceneRankingReporting;
-
     private static Stage stage;
-    private static Database data;
+    // private static Database data;//reference to the database
     private static DataHandlerPeople dataHandlerPeople;//this is for the people class
     private static DataHandlerInventory dataHandlerInventory;//this is for the people class
     private static DataHandlerTransaction dataHandlerTransaction;//this is for the transaction class
 
-  //adds reference to the data object
+    //adds reference to the data object
     public static DataHandlerPeople getDataHandlerPeople() {
-    return dataHandlerPeople;
-}
-    
-      //adds reference to the data object
+        return dataHandlerPeople;
+    }
+
+    //adds reference to the data object
     public static DataHandlerInventory getDataHandlerInventory() {
-    return dataHandlerInventory;
-}
-    
-      //adds reference to the data object
+        return dataHandlerInventory;
+    }
+
+    //adds reference to the data object
     public static DataHandlerTransaction getDataHandlerTransaction() {
-    return dataHandlerTransaction;
-}
-    
+        return dataHandlerTransaction;
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
         //Instatiates the DataHandler object
-        data = new Database("data.txt");
+        //data = new Database("data.txt");
+        //these are the data files for the arrays/information we are storing
         dataHandlerPeople = new DataHandlerPeople("people.txt");
         dataHandlerInventory = new DataHandlerInventory("inventory.txt");
         dataHandlerTransaction = new DataHandlerTransaction("transaction.txt");
-        
-        //Creates the Main and AddNumber scene 
+
+        //loads the FXML screens as per name
         Parent rootSign = FXMLLoader.load(getClass().getResource("signIn.fxml"));
         Parent rootMain = FXMLLoader.load(getClass().getResource("mainMain.fxml"));
-
+        //loads the FXML screens as per name - inventory data
         Parent rootAddInventory = FXMLLoader.load(getClass().getResource("inventoryAdd.fxml"));
         Parent rootEditInventory = FXMLLoader.load(getClass().getResource("inventoryEdit.fxml"));
         Parent rootMainInventory = FXMLLoader.load(getClass().getResource("inventoryMain.fxml"));
         Parent rootStocktakeInventory = FXMLLoader.load(getClass().getResource("inventoryStocktake.fxml"));
         Parent rootCurrentStockInventory = FXMLLoader.load(getClass().getResource("inventoryCurrentStock.fxml"));
-
+        //loads the FXML screens as per name - customer data
         Parent rootAddCustomer = FXMLLoader.load(getClass().getResource("customerAdd.fxml"));
         Parent rootEditCustomer = FXMLLoader.load(getClass().getResource("customerEdit.fxml"));
         Parent rootMainCustomer = FXMLLoader.load(getClass().getResource("customerMain.fxml"));
         Parent rootOrderFormCustomer = FXMLLoader.load(getClass().getResource("customerOrderForm.fxml"));
-
+        //loads the FXML screens as per name - vendor data
         Parent rootAddVendor = FXMLLoader.load(getClass().getResource("vendorAdd.fxml"));
         Parent rootEditVendor = FXMLLoader.load(getClass().getResource("vendorEdit.fxml"));
         Parent rootMainVendor = FXMLLoader.load(getClass().getResource("vendorMain.fxml"));
         Parent rootPurchaseOrderVendor = FXMLLoader.load(getClass().getResource("vendorPurchaseOrder.fxml"));
-
+        //loads the FXML screens as per name - reporting screen
         Parent rootCustomerList = FXMLLoader.load(getClass().getResource("reportingListCustomer.fxml"));
         Parent rootVendorList = FXMLLoader.load(getClass().getResource("reportingListVendor.fxml"));
         Parent rootReportingMain = FXMLLoader.load(getClass().getResource("reportingMain.fxml"));
@@ -104,25 +99,26 @@ public class App extends Application {
         Parent rootPurchaseHistory = FXMLLoader.load(getClass().getResource("reportingPurchaseHistory.fxml"));
         Parent rootRanking = FXMLLoader.load(getClass().getResource("reportingRanking.fxml"));
 
+        //the following code will initialise the scenes
         sceneSign = new Scene(rootSign);
         sceneMain = new Scene(rootMain);
-
+        //the following code will initialise the scenes - inventory
         sceneAddInventory = new Scene(rootAddInventory);
         sceneEditInventory = new Scene(rootEditInventory);
         sceneMainInventory = new Scene(rootMainInventory);
         sceneStocktakeInventory = new Scene(rootStocktakeInventory);
         sceneCurrentStockInventory = new Scene(rootCurrentStockInventory);
-
+        //the following code will initialise the scenes - customer 
         sceneAddCustomer = new Scene(rootAddCustomer);
         sceneEditCustomer = new Scene(rootEditCustomer);
         sceneMainCustomer = new Scene(rootMainCustomer);
         sceneOrderFormCustomer = new Scene(rootOrderFormCustomer);
-
+        //the following code will initialise the scenes - vendor
         sceneAddVendor = new Scene(rootAddVendor);
         sceneEditVendor = new Scene(rootEditVendor);
         sceneMainVendor = new Scene(rootMainVendor);
         scenePurchaseOrderVendor = new Scene(rootPurchaseOrderVendor);
-
+        //the following code will initialise the scenes - reporting
         sceneCustomerListReporting = new Scene(rootCustomerList);
         sceneVendorListReporting = new Scene(rootVendorList);
         sceneMainReporting = new Scene(rootReportingMain);
@@ -132,25 +128,29 @@ public class App extends Application {
         sceneProfitMarginReporting = new Scene(rootProfitMargin);
         scenePurchaseHistoryReporting = new Scene(rootPurchaseHistory);
         sceneRankingReporting = new Scene(rootRanking);
-
+        
+        //reference to the primary stage
         this.stage = stage;
-       
-        // Sets style to to remove the title bar - minimize etc
-stage.initStyle(StageStyle.UNDECORATED);
 
-        //scene = new Scene(loadFXML("mainMenu"), 620, 510);
-               stage.setScene(sceneSign);
+        // code to remove the standard buttons on the app - minimize etc
+        stage.initStyle(StageStyle.UNDECORATED);
+
+        //settig the initial scene
+        stage.setScene(sceneSign);
+        //displaying the app 
         stage.show();
     }
+    private static ReportingRankingController reportingRankingController;
 
-    //Method for passing a reference to the data object
-   // public static Database getDataHandler() {
-   //     return data;
-  //  }
-    
-   
+public static ReportingRankingController getReportingRankingController() {
+    if (reportingRankingController == null) {
+        reportingRankingController = new ReportingRankingController();
+    }
+    return reportingRankingController;
+}
 
 
+  
     //Method for switching scenes
     public static void changeScene(int sc) {
         switch (sc) {
@@ -234,7 +234,7 @@ stage.initStyle(StageStyle.UNDECORATED);
     public static void exit() {
         stage.close();
     }
-
+    //this runs the main program/launches
     public static void main(String[] args) {
         launch();
     }

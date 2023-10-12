@@ -9,16 +9,16 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 /**
  * FXML Controller class
  *
- * @author duane
+ * @author Tropico
  */
+
+//this is the sign in page/controller
 public class SignInController implements Initializable {
 
     @FXML
@@ -36,32 +36,26 @@ public class SignInController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO: any initialization code if necessary
+        //not needed
     }    
 
-    @FXML
+    @FXML //login button
     private void handleLoginAction(ActionEvent event) {
         if (usernameField.getText().equals(CORRECT_USERNAME) && 
             passwordField.getText().equals(CORRECT_PASSWORD)) {
             // Switch to the main page
             App.changeScene(1);
         } else {
-            showAlert("Login Failed", "Incorrect username or password.");
+            Alerts.showErrorAlert("Login Failed", "Incorrect username or password.");
         }
           // Clear the password field after attempting to log in
     passwordField.clear();
     }
 
-    @FXML
+    @FXML //exit button
     private void handleExitAction(ActionEvent event) {
         App.exit();
     }
 
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
+  
 }

@@ -11,19 +11,17 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
+
 /**
  * FXML Controller class
  *
- * @author duane
+ * @author Tropico
  */
+// order receipt controller
 public class ReportingOrderReceiptController implements Initializable {
-
 
     @FXML
     private Button resetButton;
@@ -41,43 +39,102 @@ public class ReportingOrderReceiptController implements Initializable {
     private Button exitButton;
     @FXML
     private TextArea mainTextField;
+
     /**
      * Initializes the controller class.
      */
-    @Override
+    @Override //this displays all orders upon entry
     public void initialize(URL url, ResourceBundle rb) {
-    DataHandlerInventory dataHandlerInventory = App.getDataHandlerInventory();
-DataHandlerPeople dataHandlerPeople = App.getDataHandlerPeople();
-DataHandlerTransaction dataHandlerTransaction = App.getDataHandlerTransaction();
-    }    
-    
-    @FXML
-    private void handleResetAction(ActionEvent event) {
-                invoiceField.clear();
-        mainTextField.clear();
+        displayAllCustomerOrders();
     }
 
-    
-@FXML
-private void handleSearchAction(ActionEvent event) {
-    // Get the invoice number entered by the user
-    String invoiceNumberStr = invoiceField.getText();
+    @FXML  //reset button
+    private void handleResetAction(ActionEvent event) {
+        invoiceField.clear();
+        mainTextField.clear();
+        displayAllCustomerOrders();
+    }
 
-    try {
-        // Convert the invoice number string to an integer
-        int invoiceNumber = Integer.parseInt(invoiceNumberStr);
+    @FXML  //search button - it will filter the customer orders to display the correct one - invoice ID
+    private void handleSearchAction(ActionEvent event) {
+        // Get the invoice number entered by the user
+        String invoiceNumberStr = invoiceField.getText();
 
-        // Access the DataHandlerTransaction instance from the main app class
+        try {
+            // Convert invoice string to an integer
+            int invoiceNumber = Integer.parseInt(invoiceNumberStr);
+
+            // Access the DataHandlerTransaction
+            DataHandlerTransaction dataHandlerTransaction = App.getDataHandlerTransaction();
+
+            // Search 
+            Transaction transaction = dataHandlerTransaction.searchTransactionByInvoiceNumber(invoiceNumber);
+
+            if (transaction != null) {
+                if (transaction instanceof TransactionCustomer) {
+                    TransactionCustomer transactionCustomer = (TransactionCustomer) transaction;
+
+                    // Access the DataHandlerPeople
+                    DataHandlerPeople dataHandlerPeople = App.getDataHandlerPeople();
+
+                    // Search for the customer using the customer ID from the transaction
+                    PersonCustomer customer = dataHandlerPeople.searchCustomer("", transactionCustomer.getCustomerID());
+
+                    // Format the date as dd-mm-yyyy
+                    String formattedDate = LocalDate.parse(transaction.getDate()).format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
+                    // display
+                    StringBuilder invoiceText = new StringBuilder();
+                    invoiceText.append("Invoice Number: ").append(transactionCustomer.getInvoiceNumber()).append("\n");
+                    invoiceText.append("Date: ").append(formattedDate).append("\n");
+                    invoiceText.append("Customer Name: ").append(customer.getName()).append("\n");
+                    invoiceText.append("Customer ID: ").append(customer.getID()).append("\n");
+                    invoiceText.append("Customer Type: ").append(customer.getType()).append("\n"); // Assuming you have a getType() method
+                    invoiceText.append("Customer Address: ").append(customer.getAddress()).append("\n");
+                    invoiceText.append("Customer Payment Options: ").append(customer.getPaymentOptions()).append("\n");
+
+                    // Iterate through the order lines and add them to the text, skipping placeholders
+                    for (int i = 0; i < transactionCustomer.getProductIDs().length; i++) {
+                        if (!"N/A".equals(transactionCustomer.getProductNames()[i])) {
+                            double lineTotal = transactionCustomer.getSalePrices()[i] * transactionCustomer.getQuantities()[i];
+                            invoiceText.append(transactionCustomer.getProductIDs()[i]).append(" | ")
+                                    .append(transactionCustomer.getProductNames()[i]).append(" | ")
+                                    .append(transactionCustomer.getSalePrices()[i]).append(" | ")
+                                    .append(transactionCustomer.getQuantities()[i]).append(" | ")
+                                    .append("Total: ").append(lineTotal).append("\n");
+                        }
+                    }
+
+                    invoiceText.append("\nOrder Total: ").append(transactionCustomer.getOrderTotal());
+
+                    // Set the text in the mainTextField
+                    mainTextField.setText(invoiceText.toString());
+                } else {
+                    Alerts.showErrorAlert("Error", "The provided Invoice Number doesn't belong to a Customer Transaction.");
+
+                }
+            } else {
+                // Transaction not found, show an error message
+                Alerts.showErrorAlert("Error", "Transaction not found with the provided Invoice Number.");
+
+            }
+        } catch (NumberFormatException e) {
+            // Handle the error when the invoice number is not a valid integer
+            Alerts.showErrorAlert("Error", "Please enter a valid Invoice Number.");
+
+        }
+    }
+
+    private void displayAllCustomerOrders() {
         DataHandlerTransaction dataHandlerTransaction = App.getDataHandlerTransaction();
+        StringBuilder allOrdersText = new StringBuilder();
 
-        // Search for the transaction by invoice number
-        Transaction transaction = dataHandlerTransaction.searchTransactionByInvoiceNumber(invoiceNumber);
-
-        if (transaction != null) {
+        // Iterate through all transactions
+        for (Transaction transaction : dataHandlerTransaction.getTransactions()) {
             if (transaction instanceof TransactionCustomer) {
                 TransactionCustomer transactionCustomer = (TransactionCustomer) transaction;
 
-                // Access the DataHandlerPeople instance from the main app class
+                // Access the DataHandlerPeople
                 DataHandlerPeople dataHandlerPeople = App.getDataHandlerPeople();
 
                 // Search for the customer using the customer ID from the transaction
@@ -86,73 +143,41 @@ private void handleSearchAction(ActionEvent event) {
                 // Format the date as dd-mm-yyyy
                 String formattedDate = LocalDate.parse(transaction.getDate()).format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 
-                // Prepare the text to display
-                StringBuilder invoiceText = new StringBuilder();
-                invoiceText.append("Invoice Number: ").append(transactionCustomer.getInvoiceNumber()).append("\n");
-                invoiceText.append("Date: ").append(formattedDate).append("\n");
-                invoiceText.append("Customer Name: ").append(customer.getName()).append("\n");
-                invoiceText.append("Customer ID: ").append(customer.getID()).append("\n");
-                invoiceText.append("Customer Type: ").append(customer.getType()).append("\n"); // Assuming you have a getType() method
-                invoiceText.append("Customer Address: ").append(customer.getAddress()).append("\n");
-                invoiceText.append("Customer Payment Options: ").append(customer.getPaymentOptions()).append("\n");
+                // Append to the StringBuilder
+                allOrdersText.append("Date: ").append(formattedDate).append(" | ");
+                allOrdersText.append("Invoice Number: ").append(transactionCustomer.getInvoiceNumber()).append(" | ");
 
-                // Iterate through the order lines and add them to the text, skipping placeholders
-                for (int i = 0; i < transactionCustomer.getProductIDs().length; i++) {
-                    if (!"N/A".equals(transactionCustomer.getProductNames()[i])) {
-                        invoiceText.append("Product ID: ").append(transactionCustomer.getProductIDs()[i]).append("\n");
-                        invoiceText.append("Product Name: ").append(transactionCustomer.getProductNames()[i]).append("\n");
-                        invoiceText.append("Sale Price: ").append(transactionCustomer.getSalePrices()[i]).append("\n");
-                        invoiceText.append("Quantity: ").append(transactionCustomer.getQuantities()[i]).append("\n");
-                        invoiceText.append("Stock Total: ").append(transactionCustomer.getStockTotals()[i]).append("\n");
-                    }
-                }
+                allOrdersText.append("Customer Name: ").append(customer.getName()).append(" | ");
+                allOrdersText.append("Customer ID: ").append(customer.getID()).append(" | ");
+                allOrdersText.append("Customer Type: ").append(customer.getType()).append(" | "); // Assuming you have a getType() method
+                allOrdersText.append("Customer Address: ").append(customer.getAddress()).append(" | ");
+                allOrdersText.append("Customer Payment Options: ").append(customer.getPaymentOptions()).append(" | ");
 
-                // Set the text in the mainTextField
-                mainTextField.setText(invoiceText.toString());
-            } else {
-                // This section can be expanded for other transaction types (e.g., TransactionVendor, TransactionAdjustment)
-                // For now, just showing a message that it's not a customer transaction
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(null);
-                alert.setContentText("The provided Invoice Number doesn't belong to a Customer Transaction.");
-                alert.showAndWait();
+                // Add a separator for readability
+                allOrdersText.append("--------------------------------------------------\n");
             }
-        } else {
-            // Transaction not found, show an error message
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Transaction not found with the provided Invoice Number.");
-            alert.showAndWait();
         }
-    } catch (NumberFormatException e) {
-        // Handle the error when the invoice number is not a valid integer
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText("Please enter a valid Invoice Number.");
-        alert.showAndWait();
-    }
-}
 
-    @FXML
+        // Set the text in the mainTextField
+        mainTextField.setText(allOrdersText.toString());
+    }
+
+    @FXML  //close button
     private void handleCloseAction(ActionEvent event) {
-          App.changeScene(17);
+        App.changeScene(17);
     }
 
-
-    @FXML
+    @FXML  //back button
     private void handleBackAction(ActionEvent event) {
-          App.changeScene(17);
+        App.changeScene(17);
     }
 
-    @FXML
+    @FXML//logout button
     private void handleLogoutAction(ActionEvent event) {
-          App.changeScene(0);
+        App.changeScene(0);
     }
 
-    @FXML
+    @FXML  //exit button
     private void handleExitAction(ActionEvent event) {
         App.exit();
     }

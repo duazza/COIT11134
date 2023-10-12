@@ -6,11 +6,13 @@ package tropcioassessment2.tropico2;
 
 /**
  *
- * @author duane
+ * @author Tropico
  */
+
+//this is the superclass for the people class
 public class Person {
     
- 
+    //define
     private String name;
     private int ID;
     private String phoneNumber;
@@ -37,11 +39,7 @@ public class Person {
      public int getID() {
         return ID;
     }
- 
-
-    
-
-    public void setID(int ID) {
+     public void setID(int ID) {
         this.ID = ID;
     }
 
@@ -68,9 +66,8 @@ public class Person {
     public void setPostcode(String postcode) {
         this.postcode = postcode;
     }
-
    
-    @Override
+    @Override   //tostring method for the person.
     public String toString() {
         return ID + "," + name + "," + phoneNumber + "," + address + "," + postcode;
     }

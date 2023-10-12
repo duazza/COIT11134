@@ -14,8 +14,10 @@ import javafx.scene.control.Button;
 /**
  * FXML Controller class
  *
- * @author duane
+ * @author Tropico
  */
+
+//this is the main inventory controller
 public class InventoryMainController implements Initializable {
 
 
@@ -38,41 +40,41 @@ public class InventoryMainController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        //not needed 
     }    
     
-    @FXML
+    @FXML  //takes user to the 'add item'
     private void handleAddAction(ActionEvent event) {
         App.changeScene(3);
     }
 
-    @FXML
+    @FXML//takes user to the 'edit' screen
     private void handleEditAction(ActionEvent event) {
         App.changeScene(4);
     }
 
-    @FXML
+    @FXML  //opens thhe stock take controller
     private void handleStocktakeAction(ActionEvent event) {
         App.changeScene(5);
     }
 
-    @FXML
+    @FXML  // opens the current stock
     private void handleCurrenAction(ActionEvent event) {
         App.changeScene(6);
         
     }
 
-    @FXML
+    @FXML  //back button
     private void handleBackAction(ActionEvent event) {
         App.changeScene(1);
     }
 
-    @FXML
+    @FXML  //logout button
     private void handleLogoutAction(ActionEvent event) {
         App.changeScene(0);
     }
 
-    @FXML
+    @FXML  //exit button
     private void handleExitAction(ActionEvent event) {
          App.exit();
     }

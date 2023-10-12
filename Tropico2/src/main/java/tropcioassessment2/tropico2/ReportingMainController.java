@@ -11,13 +11,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 import javafx.scene.control.Button;
+
 /**
  * FXML Controller class
  *
- * @author duane
+ * @author Tropico
  */
-public class ReportingMainController implements Initializable {
 
+//This is the main controller for the reporting menu
+public class ReportingMainController implements Initializable {
 
     @FXML
     private Button salesRankingButton;
@@ -43,72 +45,74 @@ public class ReportingMainController implements Initializable {
     private Button exitButton;
     @FXML
     private Button backButton;
+
     /**
      * Initializes the controller class.
      */
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
-    @FXML
+        // not needed
+    }
+
+    @FXML //sales ranking controller
     private void handleSalesRankingAction(ActionEvent event) {
-          App.changeScene(23);
+        App.changeScene(23);
     }
 
-    @FXML
+    @FXML //profit margin controller
     private void handleProfitMarginAction(ActionEvent event) {
-          App.changeScene(21);
+        App.changeScene(21);
     }
 
-    @FXML
+    @FXML  //price list controller
     private void handlePriceListAction(ActionEvent event) {
-          App.changeScene(20);
+        App.changeScene(20);
     }
 
-    @FXML
+    @FXML  //order history controller
     private void handleOrderHistoryAction(ActionEvent event) {
-          App.changeScene(19);
+        App.changeScene(19);
     }
 
-    @FXML
+    @FXML  //customer list controller
     private void handleCutomerListAction(ActionEvent event) {
-          App.changeScene(15);
+        App.changeScene(15);
     }
 
-    @FXML
+    @FXML //vendor list controller
     private void handleVedorListAction(ActionEvent event) {
-          App.changeScene(16);
+        App.changeScene(16);
     }
 
-    @FXML
+    @FXML  //purchase history controller
     private void handlePurchaseHistoryAction(ActionEvent event) {
-          App.changeScene(22);
+        App.changeScene(22);
     }
 
-    @FXML
+    @FXML  //order receipt controller
     private void handleViewReceiptAction(ActionEvent event) {
-          App.changeScene(18);
+        App.changeScene(18);
     }
 
-    @FXML
+    @FXML //close button
     private void handleCloseAction(ActionEvent event) {
-          App.changeScene(1);
+        App.changeScene(1);
     }
 
-    @FXML
+    @FXML //logout button
     private void handleLogoutAction(ActionEvent event) {
-          App.changeScene(0);
+        App.changeScene(0);
     }
 
-    @FXML
+    @FXML //exit button
     private void handleExitAction(ActionEvent event) {
         App.exit();
     }
 
-    @FXML
+    @FXML //back button
     private void handleBackAction(ActionEvent event) {
-          App.changeScene(1);
+        App.changeScene(1);
     }
 
 }

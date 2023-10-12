@@ -9,17 +9,17 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+
 /**
  * FXML Controller class
  *
- * @author duane
+ * @author Tropico
  */
+//this is the current stock controller
 public class InventorycurrentStockController implements Initializable {
-
 
     @FXML
     private Button closeButton;
@@ -39,196 +39,82 @@ public class InventorycurrentStockController implements Initializable {
     private Button logoutButton;
     @FXML
     private Button exitButton;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
-    @FXML
+        //not needed
+    }
+
+    @FXML //close button
     private void handleCloseAction(ActionEvent event) {
-          App.changeScene(2);
-    }
-    
-    
-    
-    
- /*   @FXML
-private void handleSearchAction(ActionEvent event) {
-    // Get the entered name or ID
-    String enteredName = nameField.getText().trim();
-    String enteredIDStr = IDField.getText().trim();
-
-    // Access the necessary data handlers
-    DataHandlerInventory dataHandlerInventory = App.getDataHandlerInventory();
-    DataHandlerTransaction dataHandlerTransaction = App.getDataHandlerTransaction();
-
-    // Load the latest transaction data
-   dataHandlerTransaction.refreshData();
-
-    StockInventory stockItem = null;
-
-    // Search by ID if provided; otherwise, search by name
-    if (!enteredIDStr.isEmpty()) {
-        try {
-            int enteredID = Integer.parseInt(enteredIDStr);
-            stockItem = dataHandlerInventory.searchItemByCode(enteredID);
-        } catch (NumberFormatException e) {
-            largeTextField.setText("Please enter a valid stock item ID.");
-            return;
-        }
-    } else if (!enteredName.isEmpty()) {
-        stockItem = dataHandlerInventory.searchItemByName(enteredName);
+        App.changeScene(2);
     }
 
-    // If stock item is found, calculate and display stock details
-    if (stockItem != null) {
-        double adjustedStockQuantity = stockItem.getStockLevel(); // Start with the initial stock level
-        
-        // Calculate the adjusted stock based on the transactions
-        for (Transaction transaction : dataHandlerTransaction.getTransactionList()) {
-            for (int i = 0; i < transaction.getProductIDs().length; i++) {
-                if (transaction.getProductIDs()[i].equals(String.valueOf(stockItem.getProductCode()))) {
-                    switch (transaction.getTransactionType().toUpperCase()) {
-                        case "ADJUSTMENT":
-                            adjustedStockQuantity -= transaction.getQuantities()[i];
-                            break;
-                        case "CUSTOMER":
-                            adjustedStockQuantity -= transaction.getQuantities()[i];
-                            break;
-                        case "VENDOR":
-                            adjustedStockQuantity += transaction.getQuantities()[i];
-                            break;
-                    }
-                }
-            }
-        }
-
-        // Display the stock details
-        StringBuilder displayText = new StringBuilder();
-        displayText.append("Inventory ID: ").append(stockItem.getProductCode()).append("\n");
-        displayText.append("Name: ").append(stockItem.getName()).append("\n");
-        displayText.append("Stock On Hand: ").append(adjustedStockQuantity).append("\n");
-
-        largeTextField.setText(displayText.toString());
-    } else {
-        largeTextField.setText("Stock item not found with the provided name or ID.");
-    }
-}
-    
-    
-
-    @FXML
+    @FXML //searches the inventory file for the stock item
     private void handleSearchAction(ActionEvent event) {
-            // Get the entered name or ID
-    String enteredName = nameField.getText().trim();
-    String enteredIDStr = IDField.getText().trim();
+        // Get the entered name or ID
+        String enteredName = nameField.getText().trim();
+        String enteredIDStr = IDField.getText().trim();
 
-    // Access the necessary data handlers
-    DataHandlerInventory dataHandlerInventory = App.getDataHandlerInventory();
-    DataHandlerTransaction dataHandlerTransaction = App.getDataHandlerTransaction();
+        // Access the necessary data handlers
+        DataHandlerInventory dataHandlerInventory = App.getDataHandlerInventory();
 
-    StockInventory stockItem = null;
+        StockInventory stockItem = null;
 
-    // Search by ID if provided; otherwise, search by name
-    if (!enteredIDStr.isEmpty()) {
-        try {
-            int enteredID = Integer.parseInt(enteredIDStr);
-            stockItem = dataHandlerInventory.searchItemByCode(enteredID);
-        } catch (NumberFormatException e) {
-            largeTextField.setText("Please enter a valid stock item ID.");
-            return;
+        // Search by ID if provided; otherwise, search by name
+        if (!enteredIDStr.isEmpty()) {
+            try {
+                int enteredID = Integer.parseInt(enteredIDStr);
+                stockItem = dataHandlerInventory.searchItemByCode(enteredID);
+            } catch (NumberFormatException e) {
+                largeTextField.setText("Please enter a valid stock item ID.");
+                return;
+            }
+        } else if (!enteredName.isEmpty()) {
+            stockItem = dataHandlerInventory.searchItemByName(enteredName);
         }
-    } else if (!enteredName.isEmpty()) {
-        stockItem = dataHandlerInventory.searchItemByName(enteredName);
-    }
 
-    // If stock item is found, calculate and display stock details
-    if (stockItem != null) {
-        
-   double netStockAdjustment = dataHandlerTransaction.calculateNetStockAdjustment(stockItem);
-double adjustedStockQuantity = (double) (stockItem.getStockLevel() + netStockAdjustment);
+        // If stock item is found, display stock details
+        if (stockItem != null) {
+            double finalStockOnHand = stockItem.getStockLevel();
 
+            // Display the stock details
+            StringBuilder displayText = new StringBuilder();
+            displayText.append("Inventory ID: ").append(stockItem.getProductCode()).append("\n");
+            displayText.append("Name: ").append(stockItem.getName()).append("\n");
+            displayText.append("Stock On Hand: ").append(finalStockOnHand).append("\n");
 
-        // Display the stock details
-        StringBuilder displayText = new StringBuilder();
-        displayText.append("Inventory ID: ").append(stockItem.getProductCode()).append("\n");
-        displayText.append("Name: ").append(stockItem.getName()).append("\n");
-        displayText.append("Stock On Hand: ").append(adjustedStockQuantity).append("\n");
-
-        largeTextField.setText(displayText.toString());
-    } else {
-        largeTextField.setText("Stock item not found with the provided name or ID.");
-    }
-
-        
-    }*/
-
-    
-    
-    @FXML
-private void handleSearchAction(ActionEvent event) {
-    // Get the entered name or ID
-    String enteredName = nameField.getText().trim();
-    String enteredIDStr = IDField.getText().trim();
-
-    // Access the necessary data handlers
-    DataHandlerInventory dataHandlerInventory = App.getDataHandlerInventory();
-    DataHandlerTransaction dataHandlerTransaction = App.getDataHandlerTransaction();  // Ensure you have this handler available
-
-    StockInventory stockItem = null;
-
-    // Search by ID if provided; otherwise, search by name
-    if (!enteredIDStr.isEmpty()) {
-        try {
-            int enteredID = Integer.parseInt(enteredIDStr);
-            stockItem = dataHandlerInventory.searchItemByCode(enteredID);
-        } catch (NumberFormatException e) {
-            largeTextField.setText("Please enter a valid stock item ID.");
-            return;
+            largeTextField.setText(displayText.toString());
+        } else {
+            largeTextField.setText("Stock item not found with the provided name or ID.");
         }
-    } else if (!enteredName.isEmpty()) {
-        stockItem = dataHandlerInventory.searchItemByName(enteredName);
     }
 
-    // If stock item is found, calculate and display stock details
-    if (stockItem != null) {
-        // Using the new method to calculate adjusted quantity
-        double adjustedQuantity = dataHandlerTransaction.calculateAdjustedQuantityForItem(stockItem.getProductCode());
-
-        double finalStockOnHand = stockItem.getStockLevel() + adjustedQuantity;
-
-        // Display the stock details
-        StringBuilder displayText = new StringBuilder();
-        displayText.append("Inventory ID: ").append(stockItem.getProductCode()).append("\n");
-        displayText.append("Name: ").append(stockItem.getName()).append("\n");
-        displayText.append("Stock On Hand: ").append(finalStockOnHand).append("\n");
-
-        largeTextField.setText(displayText.toString());
-    } else {
-        largeTextField.setText("Stock item not found with the provided name or ID.");
-    }
-}
-
-    
-    
-    @FXML
+    @FXML  //button to reset controller
     private void handleResetAction(ActionEvent event) {
+        // Clear the text fields
+        nameField.clear();
+        IDField.clear();
+        largeTextField.clear();
     }
 
-    @FXML
+    @FXML  //back button
     private void handleBackAction(ActionEvent event) {
-          App.changeScene(2);
+        nameField.clear(); // Clear the text fields 
+        IDField.clear();
+        largeTextField.clear();
+        App.changeScene(2);
     }
 
-    @FXML
+    @FXML  //logout button
     private void handleLogoutAction(ActionEvent event) {
-          App.changeScene(0);
+        App.changeScene(0);
     }
 
-    @FXML
+    @FXML  //exit button
     private void handleExitAction(ActionEvent event) {
         App.exit();
     }

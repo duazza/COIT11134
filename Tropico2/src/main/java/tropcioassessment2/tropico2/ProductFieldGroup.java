@@ -4,19 +4,20 @@
  */
 package tropcioassessment2.tropico2;
 
-import javafx.scene.control.TextField;
+//import javafx.scene.control.TextField;
 
 /**
  *
- * @author duane
+ * @author Tropico 
  */
-
-//this is a helper class that helps groups the fields related to each product.
+/*
+//needed a  helper class to help  group fields related to each product.
 public class ProductFieldGroup {
     public TextField productCodeField;
     public TextField qtyField;
-    public TextField priceField;  // ... and any other fields you might need
+    public TextField priceField;  
 
+    //Constructor
     public ProductFieldGroup(TextField productCodeField, TextField qtyField, TextField priceField) {
         this.productCodeField = productCodeField;
         this.qtyField = qtyField;
@@ -47,5 +48,4 @@ public class ProductFieldGroup {
         this.priceField = priceField;
     }
     
-    
-}
+    */
